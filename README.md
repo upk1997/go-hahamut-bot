@@ -187,7 +187,11 @@ eventContent := &hahamut.EventContent{
         },
     },
 }
-
+resp, err := myBot.AddEvent(receiver, eventID, eventContent)
+if err != nil {
+	log.Fatalln(err)
+}
+fmt.Println(resp)
 ```
 The definition of event content is same as starting an event. Get an **"event adding"** (hahamut.ResponseEventAdding) as response if successfully refreshed the event.
 
