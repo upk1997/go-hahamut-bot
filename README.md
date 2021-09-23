@@ -187,7 +187,8 @@ eventContent := &hahamut.EventContent{
         },
     },
 }
-resp, err := myBot.AddEvent(receiver, eventID, eventContent)
+receiverID := "sega"
+resp, err := myBot.AddEvent(receiverID, eventID, eventContent)
 if err != nil {
 	log.Fatalln(err)
 }
