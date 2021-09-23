@@ -24,7 +24,7 @@ import "github.com/upk1997/go-hahamut-bot"
 ## Sending Messages To Someone
 
 ### Text
-```go!
+```go
 receiverID := "sega"
 message := "Test message"
 _, err := myBot.SendText(receiverID, message)
@@ -35,7 +35,7 @@ if err != nil {
 
 ### Sticker
 
-```go!
+```go
 receiverID := "sega"
 stickerGroup := "1"
 stickerID := "08"
@@ -49,7 +49,7 @@ More stickers information about group & ID: [Stickers list](https://haha.gamer.c
 ### Image
 
 #### Uploading local image file
-```go!
+```go
 // upload image from local
 image, err := myBot.UploadImageFromLocal("D:/test.png")
 if err != nil {
@@ -57,7 +57,7 @@ if err != nil {
 }
 ```
 #### Uploading & image file from URL
-```go!
+```go
 // upload image from URL
 imageURL := "https://avatar2.bahamut.com.tw/avataruserpic/s/e/sega/sega.png"
 image, err := myBot.UploadImageFromURL(imageURL)
@@ -66,7 +66,7 @@ if err != nil {
 }
 ```
 #### Sending image
-```go!
+```go
 // send image
 receiverID := "sega"
 _, err = myBot.SendImage(receiverID, image)
@@ -81,7 +81,7 @@ The images uploaded to Bahamut server are reusable. You can save these propertie
 
 ### Start A New Event
 
-```go!
+```go
 mainImageFilename := fmt.Sprintf("%s.%s", image.ID, image.Extension)
 eventContent := &hahamut.EventContent{
     Image: mainImageFilename,
@@ -146,7 +146,7 @@ Beware of the content of eventID variable, it will be error message instead of e
 
 ### Adding (Refreshing) An Exising Event
 
-```go!
+```go
 mainImageFilename := fmt.Sprintf("%s.%s", image.ID, image.Extension)
 eventContent := &hahamut.EventContent{
     Image: mainImageFilename,
@@ -196,7 +196,7 @@ The definition of event content is same as starting an event. Get an **"event ad
 
 When sending messages, it also returns an error if the response content isn't **"get data\~\~"** (hahamut.ResponseGetData) defined by Bahamut developers. If you want to handle different response types, you can find them from response_type.go. Like this:
 
-```go!
+```go
 if err != nil {
     switch err.Error() {
     case hahamut.ResponseInvalidAccessToken:
@@ -238,7 +238,7 @@ The ParseWebhookEventBody function will check the signature forcibly for securit
 
 ## HTTP Server & Webhook Example
 
-```go=!
+```go
 package main
 
 import (
