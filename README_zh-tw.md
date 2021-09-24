@@ -29,7 +29,7 @@ myBot := hahamut.NewBot(botID, botAccessToken, botSecretKey)
 ### 文字訊息
 ```go
 receiverID := "sega"
-message := "Test message"
+message := "測試訊息"
 _, err := myBot.SendText(receiverID, message)
 if err != nil {
     log.Fatalln(err)
@@ -92,7 +92,7 @@ eventContent := &hahamut.EventContent{
         Color:   "#FFFF00",
     },
     Text: hahamut.EventText{
-        Message: "Main message",
+        Message: "主要文字訊息",
         Color:   "#FF00FF",
     },
     Button: hahamut.EventButton{
@@ -102,28 +102,28 @@ eventContent := &hahamut.EventContent{
                 Disabled: false,
                 Hidden:   false,
                 Order:    1,
-                Text:     "Option 1 message",
+                Text:     "選項一訊息",
                 Command:  "/bot option 1",
             },
             {
                 Disabled: false,
                 Hidden:   false,
                 Order:    2,
-                Text:     "Option 2 message",
+                Text:     "選項二訊息",
                 Command:  "/bot option 2",
             },
             {
                 Disabled: false,
                 Hidden:   false,
                 Order:    3,
-                Text:     "Option 3 message",
+                Text:     "選項三訊息",
                 Command:  "/bot option 3",
             },
             {
                 Disabled: false,
                 Hidden:   false,
                 Order:    4,
-                Text:     "Option 4 message",
+                Text:     "選項四訊息",
                 Command:  "/bot option 4",
             },
         },
@@ -133,7 +133,7 @@ receiverID := "sega"
 entryImageFilename := fmt.Sprintf("%s.%s", image.ID, image.Extension)
 eventID, err := myBot.StartEvent(receiverID, entryImageFilename, eventContent)
 if err != nil {
-    fmt.Println("Error:", err.Error())
+    fmt.Println("錯誤:", err.Error())
 }
 ```
 * Entry image: 顯示在聊天訊息介面裡，讓使用者點入的圖片
@@ -155,7 +155,7 @@ eventContent := &hahamut.EventContent{
         Color:   "#999900",
     },
     Text: hahamut.EventText{
-        Message: "Main message (new!)",
+        Message: "更新過後的主要文字訊息",
         Color:   "#990099",
     },
     Button: hahamut.EventButton{
@@ -164,23 +164,23 @@ eventContent := &hahamut.EventContent{
             {
                 Disabled: true,
                 Order:    1,
-                Text:     "Option 1 message ++",
+                Text:     "選項一訊息 ++",
                 Command:  "/bot option 1 2",
             },
             {
                 Order:    2,
-                Text:     "Option 2 message ++",
+                Text:     "選項二訊息 ++",
                 Command:  "/bot option 2 2",
             },
             {
                 Disabled: true,
                 Order:    3,
-                Text:     "Option 3 message ++",
+                Text:     "選項三訊息 ++",
                 Command:  "/bot option 3 2",
             },
             {
                 Order:    4,
-                Text:     "Option 4 message ++",
+                Text:     "選項四訊息 ++",
                 Command:  "/bot option 4 2",
             },
         },
@@ -204,9 +204,9 @@ fmt.Println(resp)
 if err != nil {
     switch err.Error() {
     case hahamut.ResponseInvalidAccessToken:
-        fmt.Println("Invalid access token.")
+        fmt.Println("無效的 access token")
     case hahamut.ResponseCannotBeInitiative:
-        fmt.Printf("Cannot send messages: No conversation with %s before.\n", receiverID)
+        fmt.Printf("無法傳送訊息: 未曾有過來自 %s 的訊息\n", receiverID)
     default:
         // 其他錯誤類型
         // ...
@@ -301,24 +301,24 @@ func myWebhook(w http.ResponseWriter, r *http.Request) {
 			handleCommandMessage(event.Time, m.SenderID, m.Message.BotCommand, m.Message.EventID)
 		} else {
 			// 未知的類型
-			fmt.Printf("[%v] Received an unknown type message\n", event.Time)
+			fmt.Printf("[%v] 接收到了一個未知類型的訊息\n", event.Time)
 			fmt.Println(string(bodyBytes))
 		}
 	}
 }
 
 func handleTextMessage(t time.Time, id, message string) {
-	fmt.Printf("[%v] Received a text message:\nSenderID: %s\nMessage: %s\n", t, id, message)
+	fmt.Printf("[%v] 接收到了一則文字訊息:\n傳送者帳號: %s\n訊息: %s\n", t, id, message)
 	myBot.SendText(id, "Nice!")
 }
 
 func handleStickerMessage(t time.Time, id, stickerGroup, stickerID string) {
-	fmt.Printf("[%v] Received a sticker:\nSenderID: %s\nSticker group: %s\nSticker ID: %s\n", t, id, stickerGroup, stickerID)
+	fmt.Printf("[%v] 接收到了一則貼圖訊息:\n傳送者帳號: %s\n貼圖組編號: %s\n貼圖編號: %s\n", t, id, stickerGroup, stickerID)
 	myBot.SendSticker(id, "11", "03")
 }
 
 func handleCommandMessage(t time.Time, id, command, eventID string) {
-	fmt.Printf("[%v] Received a command:\nSenderID: %s\nCommand: %s\nEvent ID: %s\n", t, id, command, eventID)
+	fmt.Printf("[%v] 接收到了一則機器人指令訊息:\n傳送者帳號: %s\n指令: %s\n事件編號: %s\n", t, id, command, eventID)
 	// 這裡可以用來處理按了 event 的按鈕之後接續的事件
 	// ...
 }
