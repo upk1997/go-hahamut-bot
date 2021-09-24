@@ -53,7 +53,7 @@ if err != nil {
 
 #### 從你的電腦直接上傳圖片
 ```go
-// upload image from local
+// 從你的電腦上傳圖片
 image, err := myBot.UploadImageFromLocal("D:/test.png")
 if err != nil {
     log.Fatalln(err)
@@ -61,7 +61,7 @@ if err != nil {
 ```
 #### 從網址上傳圖片
 ```go
-// upload image from URL
+// 從網址上傳圖片
 imageURL := "https://avatar2.bahamut.com.tw/avataruserpic/s/e/sega/sega.png"
 image, err := myBot.UploadImageFromURL(imageURL)
 if err != nil {
@@ -70,7 +70,7 @@ if err != nil {
 ```
 #### 傳送圖片
 ```go
-// send image
+// 傳送圖片
 receiverID := "sega"
 _, err = myBot.SendImage(receiverID, image)
 if err != nil {
@@ -208,7 +208,7 @@ if err != nil {
     case hahamut.ResponseCannotBeInitiative:
         fmt.Printf("Cannot send messages: No conversation with %s before.\n", receiverID)
     default:
-        // other error types
+        // 其他錯誤類型
         // ...
     }
 }
@@ -220,16 +220,16 @@ if err != nil {
 
 ```go
 func myWebhook(w http.ResponseWriter, r *http.Request) {
-    // get body content
+    // 取得連線請求的 body 內容
     bodyBytes, err := ioutil.ReadAll(r.Body)
     if err != nil {
         log.Fatalln(err)
     }
 
-    // get the signature from request header
+    // 取得連線請求附帶的簽章
     signature := r.Header.Get("x-baha-data-signature")
 
-    // parse event body & check signature
+    // 解析 body 內容，同時檢查簽章是否有效
     event, err := myBot.ParseWebhookEventBody(bodyBytes, signature)
     if err != nil {
         fmt.Println(err.Error())
@@ -266,41 +266,41 @@ func init() {
 }
 
 func main() {
-	// set router & serve
+	// 設定 webhook，建置 HTTP 伺服器
 	http.HandleFunc("/hahamutBot", myWebhook)
 	http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 }
 
 func myWebhook(w http.ResponseWriter, r *http.Request) {
-	// get body content
+	// 取得連線請求的 body 內容
 	bodyBytes, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	// get the signature from request header
+	// 取得連線請求附帶的簽章
 	signature := r.Header.Get("x-baha-data-signature")
 
-	// parse event body & check signature
+	// 解析 body 內容，同時檢查簽章是否有效
 	event, err := myBot.ParseWebhookEventBody(bodyBytes, signature)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
 
-	// get messages
+	// 取得訊息內容
 	for _, m := range event.Messaging {
 		if m.Message.Text != "" {
-			// received a text message
+			// 得到文字訊息
 			handleTextMessage(event.Time, m.SenderID, m.Message.Text)
 		} else if m.Message.Sticker.ID != "" {
-			// received a sticker message
+			// 得到貼圖訊息
 			handleStickerMessage(event.Time, m.SenderID, m.Message.Sticker.Group, m.Message.Sticker.ID)
 		} else if m.Message.BotCommand != "" {
-			// received a bot command message
+			// 得到機器人指令訊息
 			handleCommandMessage(event.Time, m.SenderID, m.Message.BotCommand, m.Message.EventID)
 		} else {
-			// unknown type
+			// 未知的類型
 			fmt.Printf("[%v] Received an unknown type message\n", event.Time)
 			fmt.Println(string(bodyBytes))
 		}
@@ -319,7 +319,7 @@ func handleStickerMessage(t time.Time, id, stickerGroup, stickerID string) {
 
 func handleCommandMessage(t time.Time, id, command, eventID string) {
 	fmt.Printf("[%v] Received a command:\nSenderID: %s\nCommand: %s\nEvent ID: %s\n", t, id, command, eventID)
-	// then you can do something to continue events after clicking a button
+	// 這裡可以用來處理按了 event 的按鈕之後接續的事件
 	// ...
 }
 ```
