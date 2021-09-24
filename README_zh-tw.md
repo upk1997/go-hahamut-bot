@@ -8,7 +8,7 @@
 ## 事前準備
 1. 到巴哈姆特的[創作者後台](https://haha.gamer.com.tw/bot_list.php)申請一個哈哈姆特的 BOT
 2. 從該 BOT 的設定頁面取得它的 access token 和 secret key
-3. 妥善保存他們，不要讓任何人取得這組 access token 或 secret key 的內容
+3. 妥善保存它們，不要讓任何人取得這組 access token 或 secret key 的內容
 
 ## 開始使用
 1. 在 cmd 或 powershell 用以下指令安裝本套件：
