@@ -1,6 +1,10 @@
 # go-hahamut-bot
 An unofficial SDK of hahamut bot.
 
+## Other languages
+* [English](https://github.com/upk1997/go-hahamut-bot/blob/master/README.md)
+* [繁體中文](https://github.com/upk1997/go-hahamut-bot/blob/master/README_zh-tw.md)
+
 ## Before Using go-hahamut-bot
 1. Apply a Hahamut bot on [Bahamut](https://haha.gamer.com.tw/bot_list.php).
 2. Get your access token & secret key from the bot detail page.
@@ -11,15 +15,14 @@ An unofficial SDK of hahamut bot.
 ```shell
 go get -u "github.com/upk1997/go-hahamut-bot"
 ```
-2. Create a new bot
-```go
-myBot := hahamut.NewBot(botID, botAccessToken, botSecretKey)
-```
-3. Import the package
+2. Import the package
 ```go
 import "github.com/upk1997/go-hahamut-bot"
 ```
-
+3. Create a new bot
+```go
+myBot := hahamut.NewBot(botID, botAccessToken, botSecretKey)
+```
 
 ## Sending Messages To Someone
 
